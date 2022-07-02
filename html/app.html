@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Anime Manager</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../css/app.css" />
+  </head>
+  <body>
+    <!-- NavBar -->
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark fixed-top">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="app.html">Anime Manager</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarID"
+          aria-controls="navbarID"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarID">
+          <div class="navbar-nav">
+            <li class="nav-item">
+              <a
+                class="nav-link active text-center"
+                aria-current="page"
+                href="#"
+                >How to Use</a
+              >
+            </li>
+            <li><hr class="dropdown-divider" /></li>
+            <li class="nav-item">
+              <a
+                class="nav-link active btn-secondary text-center"
+                aria-current="page"
+                href="#"
+                data-toggle="modal"
+                data-target="#addNewModal"
+                >Add New</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link active btn-secondary text-center"
+                aria-current="page"
+                href="#"
+                data-toggle="modal"
+                data-target="#deleteModal"
+                id="deleteBtn"
+                >Delete</a
+              >
+            </li>
+            <li><hr class="dropdown-divider" /></li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle text-center"
+                href="#"
+                id="navbarDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Account Settings
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li>
+                  <a
+                    class="dropdown-item text-center"
+                    href="#"
+                    data-toggle="modal"
+                    data-target="#settingsModal"
+                    >Settings</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item text-center" id="logOutBtn" href="#"
+                    >Log Out</a
+                  >
+                </li>
+              </ul>
+            </li>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Log Out success message -->
+    <div
+      class="alert alert-danger alert-dismissible mt-5"
+      role="alert"
+      id="logOutMsg"
+      style="visibility: hidden"
+    >
+      <strong id="logOutText">Logging Out</strong>
+    </div>
+
+    <!-- Anime List Section -->
+    <section>
+      <div class="container mt-2">
+        <div class="row" id="animeList">
+          <div class="col-md-3 col-sm-6">
+            <div class="card card-block">
+              <img
+                src="https://static.pexels.com/photos/7096/people-woman-coffee-meeting.jpg"
+                alt="Photo of sunset"
+              />
+              <h5 class="card-title mt-3 mb-3 text-center">ANIME TITLE</h5>
+              <p class="card-text text-center">Episodes remaining: 10</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Modals -->
+    <!-- settings -->
+    <div class="modal fade" id="settingsModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="container">
+            <div class="modal-header justify-content-center">
+              <h2 class="modal-title">Settings</h2>
+            </div>
+
+            <!-- Error Message -->
+            <div
+              class="alert alert-danger alert-dismissible text-center"
+              role="alert"
+              style="display: none"
+              id="settingsErrorMsg"
+            >
+              <strong id="settingsErrorText"></strong>
+            </div>
+
+            <!-- Success Message -->
+            <div
+              class="alert alert-success alert-dismissible text-center"
+              role="alert"
+              style="display: none"
+              id="settingsSuccessMsg"
+            >
+              <strong id="settingsSuccessText">New Settings Applied!</strong>
+            </div>
+
+            <!-- UserName and Password Inputs -->
+            <form id="newSettings">
+              <div class="modal-body">
+                <div class="form-group">
+                  <label for="newUserName">Username</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="newUserName"
+                    placeholder="Enter new username"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="newPassword">Password</label>
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="newPassword"
+                    placeholder="Enter new password"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <input
+                    type="password"
+                    class="form-control mt-1"
+                    id="confirmNewPassword"
+                    placeholder="Confirm new password"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div class="modal-footer justify-content-center">
+                <!-- APPLY SETTINGS BUTTON -->
+                <input type="submit" class="btn btn-secondary" value="Apply" />
+
+                <!-- CLOSE MODAL BUTTON -->
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-dismiss="modal"
+                >
+                  Close
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- add new -->
+    <div class="modal fade" id="addNewModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="container">
+            <div class="modal-header justify-content-center">
+              <h2 class="modal-title">Add New Anime</h2>
+            </div>
+
+            <!-- Error Message -->
+            <div
+              class="alert alert-danger alert-dismissible text-center"
+              role="alert"
+              style="display: none"
+              id="addNewErrorMsg"
+            >
+              <strong id="addNewErrorText"></strong>
+            </div>
+
+            <!-- Success Message -->
+            <div
+              class="alert alert-success alert-dismissible text-center"
+              role="alert"
+              style="display: none"
+              id="addNewSuccessMsg"
+            >
+              <strong>New Anime has been added!</strong>
+            </div>
+
+            <!-- New Anime Data Inputs -->
+            <form id="newAnimeData">
+              <div class="modal-body">
+                <div class="form-group">
+                  <label for="addNewTitle">Title</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="addNewTitle"
+                    placeholder="Ex: Death Note"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="addNewEpisodes">Episodes</label>
+                  <input
+                    type="number"
+                    min="1"
+                    class="form-control"
+                    id="addNewEpisodes"
+                    placeholder="Ex: 37"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="addNewEpisodesWatched">Episodes watched</label>
+                  <input
+                    type="number"
+                    min="0"
+                    class="form-control"
+                    id="addNewEpisodesWatched"
+                    placeholder="Ex: 13"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="addNewLink">Link</label>
+                  <input
+                    type="url"
+                    class="form-control"
+                    id="addNewLink"
+                    placeholder="Ex: https://www.anitube.site/60370/"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="addNewImg">Image</label>
+                  <input
+                    type="url"
+                    class="form-control"
+                    id="addNewImg"
+                    placeholder="Ex: https://i.insider.com/61d77bde95f1b90018379e25?width=750&format=jpeg&auto=webp"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div class="modal-footer justify-content-center">
+                <!-- ADD NEW BUTTON -->
+                <input type="submit" class="btn btn-secondary" value="Add" />
+
+                <!-- CLOSE MODAL BUTTON -->
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-dismiss="modal"
+                >
+                  Close
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- delete -->
+    <div class="modal fade" id="deleteModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="container">
+            <div class="modal-header justify-content-center">
+              <h2 class="modal-title">Delete Anime</h2>
+            </div>
+
+            <!-- Error Message -->
+            <div
+              class="alert alert-danger alert-dismissible text-center"
+              role="alert"
+              style="display: none"
+              id="deleteErrorMsg"
+            >
+              <strong>You don't have any anime in your list</strong>
+            </div>
+
+            <!-- Success Message -->
+            <div
+              class="alert alert-success alert-dismissible text-center"
+              role="alert"
+              style="display: none"
+              id="deleteSuccessMsg"
+            >
+              <strong>Anime removed from the list</strong>
+            </div>
+
+            <!-- New Anime Data Inputs -->
+            <form id="deleteAnimeData">
+              <div class="modal-body">
+                <div class="form-group" id="deleteListSection"></div>
+              </div>
+
+              <div class="modal-footer justify-content-center">
+                <!-- DELETE BUTTON -->
+                <input type="submit" class="btn btn-secondary" value="Delete" />
+
+                <!-- CLOSE MODAL BUTTON -->
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-dismiss="modal"
+                >
+                  Close
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Anime Content -->
+    <div class="modal fade" id="animeModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="container">
+            <div class="modal-header justify-content-center">
+              <h2 class="modal-title" id="animeContentModalTitle">
+                Anime Title
+              </h2>
+            </div>
+
+            <!-- Error Message -->
+            <div
+              class="alert alert-danger alert-dismissible text-center"
+              role="alert"
+              style="display: none"
+              id="animeErrorMsg"
+            >
+              <strong>Episodes watched is higher than episodes</strong>
+            </div>
+
+            <!-- Success Message -->
+            <div
+              class="alert alert-success alert-dismissible text-center"
+              role="alert"
+              style="display: none"
+              id="animeSuccessMsg"
+            >
+              <strong>Anime has been updated</strong>
+            </div>
+
+            <!-- Anime Content -->
+            <form id="animeContent">
+              <div class="modal-body">
+                <div class="form-group">
+                  <label for="animeContentEpisodes">Episodes</label>
+                  <input
+                    type="number"
+                    min="1"
+                    class="form-control"
+                    id="animeContentEpisodes"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="animeContentEpisodesWatched"
+                    >Episodes watched</label
+                  >
+                  <input
+                    type="number"
+                    min="0"
+                    class="form-control"
+                    id="animeContentEpisodesWatched"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="animeContentLink">Link</label>
+                  <input
+                    type="url"
+                    class="form-control"
+                    id="animeContentLink"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="animeContentImg">Image</label>
+                  <input
+                    type="url"
+                    class="form-control"
+                    id="animeContentImg"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div class="modal-footer justify-content-center">
+                <!-- APPLY BUTTON -->
+                <input type="submit" class="btn btn-secondary" value="Apply" />
+
+                <!-- CLOSE MODAL BUTTON -->
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-dismiss="modal"
+                >
+                  Close
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js"
+      integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"
+      integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/"
+      crossorigin="anonymous"
+    ></script>
+    <script type="module" src="../js/app.js"></script>
+  </body>
+</html>
