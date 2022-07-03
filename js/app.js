@@ -387,4 +387,12 @@ document.querySelector("#animeContent").addEventListener("submit", (e) => {
   loadAnimeList();
 });
 
+// add event to open anime button
+document.querySelector("#openAnimeBtn").addEventListener("click", () => {
+  const animeLink = document.querySelector("#animeContentLink").value;
+
+  // open on different tab
+  window.open(animeLink, "_blank");
+});
+
 loadAnimeList();
