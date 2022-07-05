@@ -287,8 +287,6 @@ function loadAnimeList() {
   if (userModel.getUserLogged().animes.length === 0) {
     // create a big size message saying the user has no animes in his list
     document.querySelector("#animeList").innerHTML = `
-      
-
     <div class="container">
       <div class="row">
         <div class="col-md-12 text-center">
@@ -296,8 +294,6 @@ function loadAnimeList() {
         </div>
       </div>
     </div>
-
-
     `;
 
     return;
