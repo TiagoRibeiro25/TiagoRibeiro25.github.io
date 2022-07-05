@@ -284,7 +284,24 @@ function loadAnimeList() {
   document.querySelector("#animeList").innerHTML = "";
 
   // if the user doesn't have any anime in his list
-  if (userModel.getUserLogged().animes.length === 0) return;
+  if (userModel.getUserLogged().animes.length === 0) {
+    // create a big size message saying the user has no animes in his list
+    document.querySelector("#animeList").innerHTML = `
+      
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <h3 class="animate-character">You don't have any animes in your list...</h3>
+        </div>
+      </div>
+    </div>
+
+
+    `;
+
+    return;
+  }
 
   // add animes to list
   for (let anime in userModel.getUserLogged().animes) {
@@ -293,12 +310,12 @@ function loadAnimeList() {
       <div class="card card-block">
         <img
           src="${userModel.getUserLogged().animes[anime].img}"
-          alt="Could not load image"
+          alt="Anime Image"
         />
-        <h5 class="card-title mt-3 mb-3 text-center">${
+        <h5 class="card-title mt-3 mb-3 text-center text-light">${
           userModel.getUserLogged().animes[anime].title
         }</h5>
-        <p class="card-text text-center">Episodes remaining: ${
+        <p class="card-text text-center text-light">Episodes remaining: ${
           userModel.getUserLogged().animes[anime].episodes -
           userModel.getUserLogged().animes[anime].watched
         }</p>

@@ -1,3 +1,11 @@
+.card-block {
+  background-color: #212529;
+}
+
+body {
+  background-color: rgb(14, 14, 14);
+}
+
 img {
   height: 200px;
   width: 100%;
@@ -58,4 +66,33 @@ div [class^="col-"] {
 .card:focus::before,
 .card:focus::after {
   transform: scale3d(1, 1, 1);
+}
+
+/* No animes */
+.animate-character {
+  text-transform: uppercase;
+  background-image: linear-gradient(
+    -225deg,
+    #ffffff 0%,
+    #8d8d8d 29%,
+    #767676 67%,
+    #d0d0d0 100%
+  );
+  background-size: auto auto;
+  background-clip: border-box;
+  background-size: 200% auto;
+  color: #fff;
+  background-clip: text;
+  text-fill-color: transparent;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: textclip 2s linear infinite;
+  display: inline-block;
+  font-size: 60px;
+}
+
+@keyframes textclip {
+  to {
+    background-position: 200% center;
+  }
 }
