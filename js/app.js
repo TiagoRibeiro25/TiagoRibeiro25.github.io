@@ -7,7 +7,7 @@ if (!userModel.isLogged()) {
 }
 
 // add event listener to logout button
-document.getElementById("logOutBtn").addEventListener("click", () => {
+document.querySelector("#logoutBtn").addEventListener("click", () => {
   document.querySelector("#logOutMsg").style.visibility = "visible";
 
   let count = 0;
