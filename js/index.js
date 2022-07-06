@@ -47,8 +47,10 @@ function loadAccess(form) {
       </p>
 
       <div class="text-center">
-        <button type="submit" class="btn btn-light">Log In</button>
+        <button type="submit" class="btn btn-light mt-1">Log In</button>
+        <button type="button" class="btn btn-light mt-1" id="guestBtn">Guest</button>
       </div>
+      
     </form>
     `
       : `
@@ -213,6 +215,36 @@ function loadAccess(form) {
       ).innerHTML = `<strong>Success!</strong> Account created.`;
       document.querySelector("#successMsgRegister").style.display = "block";
     });
+
+  // add event to guest button
+  document.querySelector("#guestBtn")?.addEventListener("click", () => {
+    document.querySelector("#successMsgLogIn").style.display = "none";
+    document.querySelector("#warningMsgLogIn").style.display = "none";
+
+    userModel.init();
+    userModel.logIn("user", "password");
+
+    // change success message
+    document.querySelector("#successMsgLogIn").innerHTML =
+      "<strong id='logInMsgText'>Logging In</strong>";
+    document.querySelector("#successMsgLogIn").style.display = "block";
+
+    let count = 0;
+    setInterval(() => {
+      if (count === 3) {
+        window.location.href = "app.html";
+        return;
+      }
+      document.querySelector("#logInMsgText").innerHTML += ".";
+
+      if (count === 2) {
+        setTimeout(() => {
+          document.querySelector("#successMsgLogIn").innerHTML += " Success!";
+        }, 333);
+      }
+      count++;
+    }, 333);
+  });
 }
 
 // Add Event Listeners to the discord button
