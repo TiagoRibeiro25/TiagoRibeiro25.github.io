@@ -33,9 +33,6 @@ document.querySelector("#newSettings").addEventListener("submit", (event) => {
 
   // reset error messages
   document.querySelector("#settingsErrorMsg").style.display = "none";
-  document.querySelector("#newUserName").style.borderColor = "";
-  document.querySelector("#newUserName").style.borderWidth = "";
-  document.querySelector("#newUserName").style.borderStyle = "";
   document.querySelector("#newPassword").style.borderColor = "";
   document.querySelector("#newPassword").style.borderWidth = "";
   document.querySelector("#newPassword").style.borderStyle = "";
@@ -44,24 +41,12 @@ document.querySelector("#newSettings").addEventListener("submit", (event) => {
   document.querySelector("#confirmNewPassword").style.borderStyle = "";
 
   // get new user name and password
-  const newUserName = document.querySelector("#newUserName").value;
   const newPassword = document.querySelector("#newPassword").value;
   const confirmNewPassword = document.querySelector(
     "#confirmNewPassword"
   ).value;
 
   userModel.init();
-
-  // check if there's already an user with the same username
-  if (userModel.users.find((user) => user.username === newUserName)) {
-    document.querySelector("#settingsErrorMsg").style = "display: block";
-    document.querySelector("#settingsErrorText").innerHTML =
-      "Username already exists";
-    document.querySelector("#newUserName").style.borderColor = "red";
-    document.querySelector("#newUserName").style.borderWidth = "2px";
-    document.querySelector("#newUserName").style.borderStyle = "solid";
-    return;
-  }
 
   // check if the passwords match
   if (newPassword !== confirmNewPassword) {
@@ -77,20 +62,19 @@ document.querySelector("#newSettings").addEventListener("submit", (event) => {
     return;
   }
 
-  // update user name and password
+  // update user password
   userModel.users.find(
     (user) => user.username === userModel.getUserLogged().username
   ).password = newPassword;
-  userModel.users.find(
-    (user) => user.username === userModel.getUserLogged().username
-  ).username = newUserName;
 
   // save changes to localStorage
   localStorage.users = JSON.stringify(userModel.users);
 
   // update user logged
   sessionStorage.user = JSON.stringify(
-    userModel.users.find((user) => user.username === newUserName)
+    userModel.users.find(
+      (user) => user.username === userModel.getUserLogged().username
+    )
   );
 
   // show success message
