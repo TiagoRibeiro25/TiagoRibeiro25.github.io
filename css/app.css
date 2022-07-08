@@ -18,7 +18,6 @@ div [class^="col-"] {
 .card {
   transition: 0.5s;
   cursor: pointer;
-  /* margin-bottom: 100px; */
 }
 .card-title {
   font-size: 15px;
