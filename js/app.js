@@ -287,7 +287,7 @@ function loadAnimeList() {
   for (let anime in userModel.getUserLogged().animes) {
     document.querySelector("#animeList").innerHTML += `
     <div class="col-md-3 col-sm-6">
-      <div class="card card-block">
+      <div class="card card-block mb-4">
         <img
           src="${userModel.getUserLogged().animes[anime].img}"
           alt="Anime Image"
